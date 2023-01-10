@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Caesari salakiri</title>
+    
+</head>
+
+<body>
+
+    <h1 id="kiri"></h1>
+    <p id="kiri1"></p>
+    <p><b id="kiri2"></b></p>
+    
+    
+
+
+    <script>
+        var pealkiri = document.getElementById("kiri").innerHTML = "See lehekülg kodeerib sisestatud teksti Caesari salakirja ja dekodeerib salakirja tagasi";
+        var mida = prompt("Kas soovid kodeerida või dekodeerida salakirja? Kodeerida - kirjuta 1 /dekodeerida - kirjuta 2: ");
+        //kodeerib
+        if (mida == "1"){
+            var tekst = prompt("Sisesta kodeeritav tekst: ");
+        
+        
+        
+            var samm = parseInt(prompt("Sisesta samm: "));
+        
+            document.getElementById("kiri1").innerHTML ="Teie poolt sisestatud tekst: " + tekst + " ja teie poolt sisestatud samm: " + samm;
+        
+
+            var tahestik = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsŠšZzŽžTtUuVvWwÕõÄäÖöÜüXxYy";
+            var indeks;
+            var kodeeritud = "";
+            for (var i = 0; i < tekst.length; i++) { // käib teksti tähed läbi
+            
+                
+
+
+            
+                if (tahestik.indexOf(tekst[i]) > -1) { //kas teksti täht on tähestikus
+                    if ((tahestik.indexOf(tekst[i]) + samm + samm) > tahestik.length -1) { //kui pikem kui tähestik, siis läheb uuele ringile
+                        indeks = (tahestik.indexOf(tekst[i]) + samm + samm) % tahestik.length;
+                        kodeeritud = kodeeritud + tahestik[indeks];
+                    } 
+                    else { // kui ei ole pikem kui tähestik
+                        kodeeritud = kodeeritud + tahestik[tahestik.indexOf(tekst[i]) + samm +samm];
+                }   
+                } 
+                else { // kui ei ole täht, siis lisatakse muutmata kujul
+                    kodeeritud = kodeeritud + tekst[i];
+                }
+        }
+
+
+
+        
+        
+        
+        document.getElementById("kiri2").innerHTML = "Kodeeritud tekst on: " + kodeeritud ;
+    }
+    // dekodeerib
+        else if (mida == "2") {
+           
+            var tekst = prompt("Sisesta dekodeeritav tekst: ");
+            var samm = parseInt(prompt("Sisesta samm: "));
+            document.getElementById("kiri1").innerHTML ="Teie poolt sisestatud tekst: " + tekst + " ja teie poolt sisestatud samm: " + samm;
+            var tahestik = "AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsŠšZzŽžTtUuVvWwÕõÄäÖöÜüXxYy";
+            var indeks;
+            var kodeeritud = "";
+            for (var i = 0; i < tekst.length; i++) { // käib teksti tähed läbi
+            
+                
+
+
+            
+                if (tahestik.indexOf(tekst[i]) > -1) { //kas teksti täht on tähestikus
+                    
+                    if ((tahestik.indexOf(tekst[i]) - samm - samm) < tahestik.length) {         //kui lühem kui tähestik, siis läheb uuele ringile          
+                        
+                        
+                        indeks = (tahestik.indexOf(tekst[i]) + tahestik.length - samm - samm) % tahestik.length;
+                        kodeeritud = kodeeritud + tahestik[indeks];
+                    } 
+                    else {  // kui saab, siis leiab kohe 
+                        kodeeritud = kodeeritud + tahestik[tahestik.indexOf(tekst[i]) - samm - samm];
+                }   
+                } 
+                else { // kui ei ole täht, siis jätab samaks
+                    kodeeritud = kodeeritud + tekst[i];
+                }
+        }
+        
+
+
+        
+        
+        
+        document.getElementById("kiri2").innerHTML = "Dekodeeritud tekst on: " + kodeeritud ;
+
+
+
+
+        } // kui pole valitud kas kodeerida või dekodeerida
+        else{
+            document.getElementById("kiri2").innerHTML = "Palun kirjuta 1 või 2!" ;
+
+        }
+        
+
+
+
+        
+    </script>
+</body>
+</html>
